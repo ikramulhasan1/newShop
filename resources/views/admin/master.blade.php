@@ -27,6 +27,9 @@
 			@include('admin.layouts.includes.footer')
 			
 		</div>
+
+	
+
 		<!-- ./wrapper -->
 		<!-- jQuery -->
 		<script src="{{asset('ui/backend')}}/plugins/jquery/jquery.min.js"></script>

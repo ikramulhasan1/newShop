@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -9,9 +10,14 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::latest();
+        if (!empty($request->get('keyword'))) {
+            $categories = $categories->where('name', 'like', '%' . $request->get('keyword') . '%');
+        }
+
+        $categories = $categories->paginate(10);
         return view('admin.Category.index', compact('categories'));
     }
 
@@ -39,15 +45,14 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.Category.edit', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->except('status'));
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -55,6 +60,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete($category);
+        return back();
     }
 }
