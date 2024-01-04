@@ -11,7 +11,9 @@
 		<!-- Theme style -->
 		<link rel="stylesheet" href="{{asset('ui/backend')}}/css/adminlte.min.css">
 		<link rel="stylesheet" href="{{asset('ui/backend')}}/css/custom.css">
-		{{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+		
+		{{-- DropZone/Image intrgration --}}
+		<link rel="stylesheet" href="{{asset('ui/backend/plugins/dropzone/min/dropzone.min.css')}}">
 	</head>
 	<body class="hold-transition sidebar-mini">
 		<!-- Site wrapper -->
@@ -40,6 +42,9 @@
 		<!-- AdminLTE for demo purposes -->
 		<script src="{{asset('ui/backend')}}/js/demo.js"></script>
         
+		{{-- DropZone/Image intrgration --}}
+		<script src="{{asset('ui/backend/plugins/dropzone/min/dropzone.min.js')}}"></script>
+
 		<script type="text/javascript">
 			$.ajaxSetup({
 				headers: {

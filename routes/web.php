@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resources([
         'categories' => CategoryController::class,
+        'subcategories' => SubCategoryController::class,
     ]);
 });
 
