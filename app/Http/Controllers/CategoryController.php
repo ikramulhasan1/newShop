@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Pagination\Paginator;
-use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Contracts\Pagination\Paginator;
+
+use function PHPUnit\Framework\isEmpty;
 
 class CategoryController extends Controller
 {
@@ -28,13 +31,28 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
+        // dd($request);
         Category::create($request->all());
-        return redirect()->route('categories.index');
+        // $request->create($request);
+
+      
+        $imageName = time().'.'.$request->images->getClientOriginalExtension();  
+         
+        $request->images->move(public_path('images'), $imageName);
+        
+        // $request->images->storeAs('images', $imageName);
+        /* 
+            Write Code Here for
+            Store $imageName name in DATABASE from HERE 
+        */
+        
+        return redirect()->route('categories.index')
+                    ->with('success', 'You have successfully upload image.')
+                    ->with('images', $imageName);
+
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Category $category)
     {
         //

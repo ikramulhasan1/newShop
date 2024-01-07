@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="email">Slug</label>
+                                    <label for="slug">Slug</label>
                                     <input type="text" name="slug" disabled value="{{ old('slug') }}" id="slug" class="form-control" placeholder="Slug">	
                                     @error('slug')
                                         <div class="text-danger">{{ $message }}</div>

@@ -20,7 +20,7 @@
     <section class="content">
         <!-- Default box -->
         <div class="container-fluid">
-            <form action="{{route('categories.store')}}" method="post">
+            <form action="{{route('categories.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-body">								
@@ -35,6 +35,17 @@
 
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name">Image</label>
+                                    <input type="file" name="images" id="inputImage" class="form-control @error('images') is-invalid @enderror">
+                                    @error('images')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+
+                                </div>
+                            </div>
+                        
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="email">Slug</label>

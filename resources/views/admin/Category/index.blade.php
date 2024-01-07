@@ -48,6 +48,7 @@
                             <tr>
                                 <th width="60">ID</th>
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>Slug</th>
                                 <th width="100">Status</th>
                                 <th width="100">Action</th>
@@ -58,6 +59,7 @@
                             <tr>
                                 <td>{{ $key + $categories->firstItem() }}</td>
                                 <td>{{$category->name }} </td>
+                                <td><img src="{{ $category->image }}" width="80px"/> </td>
                                 <td>{{$category->slug }} </td>
                                 <td>
                                     @if ($category->status == 1)
@@ -91,7 +93,11 @@
                                 </td>
                             </tr> 
                             @empty
-                               <h3>No Data</h3> 
+                            <table>                       
+                                </tr>
+                                    </th><h4 style="text-align: center">No data available</h4>  </th>                                                                                
+                                </tr> 
+                            </table> 
                             @endforelse
                         
                         </tbody>

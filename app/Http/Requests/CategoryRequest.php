@@ -24,6 +24,7 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'required',
             'slug' => 'unique:categories',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }
