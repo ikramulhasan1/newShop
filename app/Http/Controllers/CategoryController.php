@@ -35,22 +35,20 @@ class CategoryController extends Controller
         Category::create($request->all());
         // $request->create($request);
 
-      
-        $imageName = time().'.'.$request->images->getClientOriginalExtension();  
-         
+
+        $imageName = time() . '.' . $request->images->getClientOriginalExtension();
+
         $request->images->move(public_path('images'), $imageName);
-        
+
         // $request->images->storeAs('images', $imageName);
         /* 
             Write Code Here for
             Store $imageName name in DATABASE from HERE 
         */
-        
-        return redirect()->route('categories.index')
-                    ->with('success', 'You have successfully upload image.')
-                    ->with('images', $imageName);
 
-        
+        return redirect()->route('categories.index')
+            ->with('success', 'You have successfully upload image.')
+            ->with('images', $imageName);
     }
 
     public function show(Category $category)

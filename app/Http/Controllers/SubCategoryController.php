@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubCategoryRequest;
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -12,37 +14,34 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
+        // $categories = Category::all();
         $subcategories = SubCategory::all();
         return view('admin.SubCategory.index', compact('subcategories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        return view('admin.SubCategory.create');
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('admin.SubCategory.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(SubCategoryRequest $request)
     {
-        //
+        // dd($request->all());
+
+        SubCategory::create($request->all());
+        return redirect()->route('subcategories.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(SubCategory $subCategory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(SubCategory $subCategory)
     {
         //
@@ -59,8 +58,9 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy(SubCategory $subCategory, $id)
     {
-        //
+        $subCategory->destroy($id);
+        return back();
     }
 }

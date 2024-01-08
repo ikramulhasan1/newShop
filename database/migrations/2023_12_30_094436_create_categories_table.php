@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('images')->nullable();
             $table->string('status')->default(1);
+            $table->unsignedBigInteger('sub_category_id')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
