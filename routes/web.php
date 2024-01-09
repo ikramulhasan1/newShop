@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Str;
 // use GuzzleHttp\Psr7\Request;
 // use Dotenv\Util\Str;
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::resources([
         'categories' => CategoryController::class,
         'subcategories' => SubCategoryController::class,
+        'brands' => BrandController::class,
     ]);
 });
 
