@@ -56,13 +56,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($brands as $key => $category)
+                                @forelse ($brands as $key => $brand)
                                     <tr>
-                                        <td>{{ $key + $brands->firstItem() }}</td>
-                                        <td>{{ $category->name }} </td>
-                                        <td>{{ $category->slug }} </td>
+                                        {{-- <td>{{ $key + $brands->firstItem() }}</td> --}}
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $brand->name }} </td>
+                                        <td>{{ $brand->slug }} </td>
                                         <td>
-                                            @if ($category->status == 1)
+                                            @if ($brand->status == 1)
                                                 <svg class="text-success-500 h-6 w-6 text-success"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -80,7 +81,7 @@
 
                                         </td>
                                         <td class="d-flex ">
-                                            <a href="{{ route('brands.edit', $category->id) }}">
+                                            <a href="{{ route('brands.edit', $brand->id) }}">
                                                 <svg class="filament-link-icon w-4 h-4 mr-1"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                     fill="currentColor" aria-hidden="true">
@@ -90,7 +91,7 @@
                                                 </svg>
                                             </a>
                                             <a href="#" class="text-danger w-4 h-4 mr-1">
-                                                <form action="{{ route('brands.destroy', $category->id) }}" method="post">
+                                                <form action="{{ route('brands.destroy', $brand->id) }}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button class="border-0 bg-transparent text-danger w-4 h-4 mr-1">
