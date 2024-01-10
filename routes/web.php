@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
         'categories' => CategoryController::class,
         'subcategories' => SubCategoryController::class,
         'brands' => BrandController::class,
+        'products' => ProductController::class,
     ]);
 });
 
