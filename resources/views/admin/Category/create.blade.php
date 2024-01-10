@@ -38,8 +38,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Image</label>
-                                    <input type="file" name="images" id="inputImage" class="form-control @error('images') is-invalid @enderror">
-                                    @error('images')
+                                    <input type="file" name="image" id="inputImage" class="form-control @error('image') is-invalid @enderror">
+                                    @error('image')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
 
