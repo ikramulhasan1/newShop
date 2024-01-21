@@ -19,7 +19,7 @@
         <!-- Main content -->
         <section class="content">
             <!-- Default box -->
-            <form action="{{ route('products.store') }}" method="post">
+            <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="container-fluid">
                     <div class="row">
@@ -53,10 +53,12 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h2 class="h4 mb-3">Media</h2>
-                                    <div id="image" class="dropzone dz-clickable">
-                                        <div class="dz-message needsclick">
+                                    <div id="image" class="">
+                                        {{-- <div class="dz-message needsclick">
                                             <br>Drop files here or click to upload.<br><br>
-                                        </div>
+                                        </div> --}}
+                                        <input type="file" name="image" id="">
+
                                     </div>
                                 </div>
                             </div>

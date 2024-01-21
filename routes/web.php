@@ -9,6 +9,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {

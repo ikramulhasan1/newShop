@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return view('admin.Product.index');
+        $products = Product::all();
+        return view('admin.Product.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $categories = Category::orderBy('name', 'asc')->get();
@@ -30,12 +30,35 @@ class ProductController extends Controller
         return view('admin.Product.create', compact('categories', 'subCategories', 'brands'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+    public function uploadImage($name, $image)
+    {
+        // image name database save
+        // main laravel project storage save
+        $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+        $file_name = $timestamp . '-' . $name . '.' . $image->getClientOriginalExtension();
+        $pathToUpload = storage_path() . '/app/public/product-images/';
+
+        if (!is_dir($pathToUpload)) {
+            mkdir($pathToUpload, 0755, true);
+        }
+        Image::make($image)->resize(634, 792)->save($pathToUpload . $file_name);
+        return $file_name;
+    }
+
+
     public function store(Request $request)
     {
-        Product::create($request->all());
+
+
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $this->uploadImage($request->name, $request->image);
+            $data['image'] = $image;
+        }
+        // Product::create($request->all());
+        Product::create($data);
+
         return redirect()->route('products.index');
     }
 

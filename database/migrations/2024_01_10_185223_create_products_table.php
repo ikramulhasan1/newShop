@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('description')->nullable();
+            $table->string('image');
             $table->double('price', 10, 2);
             $table->double('compare_price', 10, 2)->nullable();
             $table->string('category');
