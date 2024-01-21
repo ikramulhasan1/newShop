@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.Product.index');
     }
 
     /**
@@ -20,7 +23,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->get();
+        $subCategories = SubCategory::orderBy('name', 'asc')->get();
+        $brands = Brand::orderBy('name', 'asc')->get();
+
+        return view('admin.Product.create', compact('categories', 'subCategories', 'brands'));
     }
 
     /**
@@ -28,20 +35,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+        return redirect()->route('products.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         //

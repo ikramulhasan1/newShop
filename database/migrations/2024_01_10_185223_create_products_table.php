@@ -18,13 +18,15 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->double('price', 10, 2);
             $table->double('compare_price', 10, 2)->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->string('category');
+            $table->unsignedBigInteger('category_id')->default(1);
+            $table->string('sub_category')->nullable();
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->enum('is_featured', ['Yes', 'No'])->default('No');
             $table->string('sku');
             $table->string('barcode')->nullable();
-            $table->enum('track_qty', ['Yes', 'No'])->default('Yes');
+            $table->enum('track_qty', ['Yes', 'No'])->default('Yes')->nullable();
             $table->integer('qty')->nullable();
             $table->integer('status')->default(1);
             $table->softDeletes();
