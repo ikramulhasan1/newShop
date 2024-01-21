@@ -51,11 +51,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($products as $key=>$product)
+                                @forelse ($products as $key => $product)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td><img src="{{ $product->image }}" alt="{{ $product->title }}"
-                                                class="img-thumbnail" width="100"></td>
+                                        {{-- <td><img src="{{ storage_path() . '/app/public/product-images/' . $product->image }}"
+                                                class="img-fluid " width="200"></td> --}}
+                                        <td><img src="{{ asset('storage/product-images/' . $product->image) }}"
+                                                class="img-fluid " width="40"></td>
+
                                         <td><a href="#">{{ $product->title }}</a></td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->qty }}</td>
