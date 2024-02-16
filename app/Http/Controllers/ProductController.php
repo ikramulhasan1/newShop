@@ -14,9 +14,14 @@ use Intervention\Image\Facades\Image;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $products = Product::latest('id');
+        if (!empty($request->get('keyword'))) {
+            $products = $products->where('title', 'like', '%' . $request->get('keyword') . '%');
+        }
+
+        $products = $products->paginate(5);
         return view('admin.Product.index', compact('products'));
     }
 
@@ -69,20 +74,20 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $brands = Brand::all();
+
+        return view('admin.Product.edit', compact('categories', 'product', 'subCategories', 'brands'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        // dd($request);
+        return redirect()->route('products.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         //

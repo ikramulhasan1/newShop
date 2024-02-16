@@ -1,93 +1,219 @@
 @extends('admin.master')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">					
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Create Category</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('categories.index')}}" class="btn btn-primary">Back</a>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid my-2">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Product</h1>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <a href="{{ route('products.index') }}" class="btn btn-primary">Back</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="container-fluid">
-            <form action="{{route('categories.update', $category->id)}}" method="post">
+            <!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
-                <div class="card">
-                    <div class="card-body">								
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" value="{{ $category->name }}" id="name" class="form-control" placeholder="Name">	
-                                    @error('name')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                <div class="container-fluid">
+                    <div class="row">
 
+                        <div class="col-md-8">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="title">Title</label>
+                                                <input type="text" name="title" value="{{ $product->title }}"
+                                                    id="title" class="form-control" placeholder="Title">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="slug">Slug</label>
+                                                <input type="text" readonly name="slug" value="{{ $product->slug }}"
+                                                    id="slug" class="form-control" placeholder="Slug">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="editor">Description</label>
+                                                <textarea name="description" id="editor" cols="30" rows="10" class="summernote" placeholder="Description">{!! $product->description !!}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="email">Slug</label>
-                                    <input type="text" name="slug" disabled value="{{ $category->slug }}" id="slug" class="form-control" placeholder="Slug">	
-                                    @error('slug')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Media</h2>
+                                    <div id="image">
+                                        {{-- <div class="dz-message needsclick">
+                                            <br>Drop files here or click to upload.<br><br>
+                                        </div> --}}
+                                        <input type="file" name="image" id="" value="{!! $product->image !!}">
+
+                                    </div>
                                 </div>
-                            </div>									
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="1">Active</option>
-                                        <option value="0">Block</option>
-                                    </select>
-                                    @error('status')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Pricing</h2>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="price">Price</label>
+                                                <input type="text" name="price" value="{{ $product->price }}"
+                                                    id="price" class="form-control" placeholder="Price">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="compare_price">Compare at Price</label>
+                                                <input type="text" value="{{ $product->compare_price }}"
+                                                    name="compare_price" id="compare_price" class="form-control"
+                                                    placeholder="Compare Price">
+                                                <p class="text-muted mt-3">
+                                                    To show a reduced price, move the product’s original price into
+                                                    Compare
+                                                    at
+                                                    price. Enter a lower value into Price.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>									
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Inventory</h2>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="sku">SKU (Stock Keeping Unit)</label>
+                                                <input type="text" name="sku" value="{{ $product->sku }}"
+                                                    id="sku" class="form-control" placeholder="sku">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="barcode">Barcode</label>
+                                                <input type="text" name="barcode" value="{{ $product->barcode }}"
+                                                    id="barcode" class="form-control" placeholder="Barcode">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" value="{{ $product->track_qty }}"
+                                                        type="checkbox" id="track_qty" name="track_qty" checked>
+                                                    <label for="track_qty" class="custom-control-label">Track
+                                                        Quantity</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="number" min="0" value="{{ $product->qty }}"
+                                                    name="qty" id="qty" class="form-control"
+                                                    placeholder="Qty">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>							
-                </div>
-                <div class="pb-5 pt-3">
-                    <button class="btn btn-primary">Create</button>
-                    <a href="brands.html" class="btn btn-outline-dark ml-3">Cancel</a>
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Product status</h2>
+                                    <div class="mb-3">
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="1">Active</option>
+                                            <option value="0">Block</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="h4  mb-3">Product category</h2>
+                                    <div class="mb-3">
+                                        <label for="category">Category</label>
+                                        <select name="category" id="category" class="form-control">
+                                            <option value="{{ $product->category }}">{{ $product->category }}</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->name }}">
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="category">Sub category</label>
+                                        <select name="sub_category" id="sub_category" class="form-control">
+                                            @foreach ($subCategories as $subCategory)
+                                                <option value="{{ $subCategory->id }}">{{ $subCategory->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Product brand</h2>
+                                    <div class="mb-3">
+                                        <select name="status" id="status" class="form-control">
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Featured product</h2>
+                                    <div class="mb-3">
+                                        <select name="status" id="status" class="form-control">
+                                            {{-- @foreach ($product as $products) --}}
+                                            <option value="{{ $product->id }}">{{ $product->is_featured }}</option>
+                                            {{-- @endforeach --}}
+                                            {{-- <option value="0">No</option>
+                                            <option value="1">Yes</option> --}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="pb-5 pt-3">
+                        <button class="btn btn-primary">Create</button>
+                        <a href="products.html" class="btn btn-outline-dark ml-3">Cancel</a>
+                    </div>
                 </div>
             </form>
-        </div>
-        <!-- /.card -->
-    </section>
-    <!-- /.content -->
-</div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
 @endsection
 
 @section('customJs')
-   {{-- <script>
-    var element = $(this);
-    $("#name").change(function(){
-        element = $(this);
-        $.ajax({
-            url: '{{ route("getSlug") }}',
-            type: 'get',
-            data: {title: element.val()},
-            dataType: 'json',
-            success: function (response) {
-                if (response["status"] == true) {
-                    $("#slug").val(response ["slug"])
-                }
-            }
-        });
-    });
-   </script> --}}
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection
