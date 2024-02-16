@@ -8,7 +8,7 @@
             <div class="container-fluid my-2">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Categories</h1>
+                        <h1>Sub-category</h1>
                     </div>
                     <div class="col-sm-6 text-right">
                         <a href="{{ route('subcategories.create') }}" class="btn btn-primary">New subCategories</a>
@@ -64,10 +64,10 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $subcategory->name }} </td>
                                         <td>{{ $subcategory->slug }} </td>
+                                        <td>{{ $subcategory->category }} </td>
 
                                         {{-- @isset($subcategory) --}}
                                         {{-- @dd($subcategory->category) --}}
-                                        <td>{{ $subcategory->category }} </td>
 
                                         {{-- @endisset --}}
                                         <td>

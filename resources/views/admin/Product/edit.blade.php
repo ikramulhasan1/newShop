@@ -39,7 +39,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="slug">Slug</label>
-                                                <input type="text" readonly name="slug" value="{{ $product->slug }}"
+                                                <input type="text" name="slug" value="{{ $product->slug }}" readonly
                                                     id="slug" class="form-control" placeholder="Slug">
                                             </div>
                                         </div>
@@ -197,7 +197,7 @@
                     </div>
 
                     <div class="pb-5 pt-3">
-                        <button class="btn btn-primary">Create</button>
+                        <button class="btn btn-primary">Update</button>
                         <a href="products.html" class="btn btn-outline-dark ml-3">Cancel</a>
                     </div>
                 </div>
