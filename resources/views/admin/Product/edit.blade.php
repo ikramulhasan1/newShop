@@ -157,9 +157,12 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="category">Sub category</label>
+
                                         <select name="sub_category" id="sub_category" class="form-control">
+                                            <option value="{{ $product->sub_category }}">{{ $product->sub_category }}
+                                            </option>
                                             @foreach ($subCategories as $subCategory)
-                                                <option value="{{ $subCategory->id }}">{{ $subCategory->name }}
+                                                <option value="{{ $subCategory->name }}">{{ $subCategory->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -171,6 +174,7 @@
                                     <h2 class="h4 mb-3">Product brand</h2>
                                     <div class="mb-3">
                                         <select name="status" id="status" class="form-control">
+
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
@@ -184,7 +188,8 @@
                                     <div class="mb-3">
                                         <select name="status" id="status" class="form-control">
                                             {{-- @foreach ($product as $products) --}}
-                                            <option value="{{ $product->id }}">{{ $product->is_featured }}</option>
+                                            <option value="{{ $product->is_featured }}">{{ $product->is_featured }}
+                                            </option>
                                             {{-- @endforeach --}}
                                             {{-- <option value="0">No</option>
                                             <option value="1">Yes</option> --}}

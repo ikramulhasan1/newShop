@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('description')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->double('price', 10, 2);
             $table->double('compare_price', 10, 2)->nullable();
             $table->string('category');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->enum('is_featured', ['Yes', 'No'])->default('No');
             $table->string('sku');
             $table->string('barcode')->nullable();
-            $table->enum('track_qty', ['Yes', 'No'])->default('Yes')->nullable();
+            $table->text('track_qty', ['Yes', 'No'])->default('Yes')->nullable();
             $table->integer('qty')->nullable();
             $table->integer('status')->default(1);
             $table->softDeletes();
