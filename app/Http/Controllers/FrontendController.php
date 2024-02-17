@@ -8,6 +8,6 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view();
+        return view('frontend.home');
     }
 }

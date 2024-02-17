@@ -17,6 +17,11 @@ use App\Http\Controllers\SubCategoryController;
 //     return view('welcome');
 // });
 
+// Frontend view
+Route::get('/', [FrontendController::class, 'index'])->name('front.home');
+
+
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,9 +37,6 @@ Route::middleware('auth')->group(function () {
         'brands' => BrandController::class,
         'products' => ProductController::class,
     ]);
-
-    // Frontend view
-    Route::get('/', [FrontendController::class, 'index'])->name('front.home');
 });
 
 require __DIR__ . '/auth.php';
