@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\SubCategoryController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -31,6 +32,9 @@ Route::middleware('auth')->group(function () {
         'brands' => BrandController::class,
         'products' => ProductController::class,
     ]);
+
+    // Frontend view
+    Route::get('/', [FrontendController::class, 'index'])->name('front.home');
 });
 
 require __DIR__ . '/auth.php';
