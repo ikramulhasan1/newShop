@@ -145,7 +145,7 @@
                                             <option value="">Select</option>
                                             @if ($categories->isNotEmpty())
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -168,11 +168,11 @@
                                 <div class="card-body">
                                     <h2 class="h4 mb-3">Product brand</h2>
                                     <div class="mb-3">
-                                        <select name="status" id="status" class="form-control">
+                                        <select name="brand" id="status" class="form-control">
                                             <option value="">Select</option>
                                             @if ($brands->isNotEmpty())
                                                 @foreach ($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                    <option value="{{ $brand->name }}">{{ $brand->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -183,9 +183,9 @@
                                 <div class="card-body">
                                     <h2 class="h4 mb-3">Featured product</h2>
                                     <div class="mb-3">
-                                        <select name="status" id="status" class="form-control">
-                                            <option value="0">No</option>
-                                            <option value="1">Yes</option>
+                                        <select name="is_featured" id="featured" class="form-control">
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
                                         </select>
                                     </div>
                                 </div>

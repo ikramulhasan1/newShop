@@ -39,8 +39,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="email">Slug</label>
-                                        <input type="text" name="slug" readonly id="slug" class="form-control">
+                                        <label for="slug">Slug</label>
+                                        <input type="text" name="slug" readonly value="{{ $category->slug }}"
+                                            id="slug" class="form-control">
                                         @error('slug')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -52,6 +53,20 @@
                                         <select name="status" id="status" class="form-control">
                                             <option value="1">Active</option>
                                             <option value="0">Block</option>
+                                        </select>
+                                        @error('status')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="showHome">Show on Home</label>
+                                        <select name="showHome" id="showHome" class="form-control">
+                                            <option {{ $category->showHome == 'Yes' ? 'selected' : '' }} value="Yes">Yes
+                                            </option>
+                                            <option {{ $category->showHome == 'No' ? 'selected' : '' }} value="No">No
+                                            </option>
                                         </select>
                                         @error('status')
                                             <div class="text-danger">{{ $message }}</div>
