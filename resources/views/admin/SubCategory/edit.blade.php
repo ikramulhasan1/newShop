@@ -7,10 +7,10 @@
             <div class="container-fluid my-2">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Create Category</h1>
+                        <h1>Edit subCategory</h1>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>
+                        <a href="{{ route('subcategories.index') }}" class="btn btn-primary">Back</a>
                     </div>
                 </div>
             </div>
@@ -20,8 +20,7 @@
         <section class="content">
             <!-- Default box -->
             <div class="container-fluid">
-                <form action="{{ route('categories.update', $category->id) }}" method="post">
-                    @method('PATCH')
+                <form action="" method="post">
                     @csrf
                     <div class="card">
                         <div class="card-body">
@@ -29,18 +28,19 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" value="{{ $category->name }}" id="name"
+                                        <input type="text" name="name" value="{{ old('name') }}" id="name"
                                             class="form-control" placeholder="Name">
                                         @error('name')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
 
                                     </div>
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="email">Slug</label>
-                                        <input type="text" name="slug" disabled value="{{ $category->slug }}"
+                                        <label for="slug">Slug</label>
+                                        <input type="text" name="slug" disabled value="{{ old('slug') }}"
                                             id="slug" class="form-control" placeholder="Slug">
                                         @error('slug')
                                             <div class="text-danger">{{ $message }}</div>
@@ -61,9 +61,24 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label for="category">Category</label>
+                                        <select name="category" id="category" class="form-control">
+                                            @if ($categories->isNotEmpty())
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        @error('category')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label for="showHome">Show on Home</label>
                                         <select name="showHome" id="showHome" class="form-control">
-                                            <option {{  }} value="Yes">Yes</option>
+                                            <option value="Yes">Yes</option>
                                             <option value="No">No</option>
                                         </select>
                                         @error('status')
@@ -71,11 +86,12 @@
                                         @enderror
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="pb-5 pt-3">
-                        <button class="btn btn-primary">Create</button>
+                        <button class="btn btn-primary">Update</button>
                         <a href="brands.html" class="btn btn-outline-dark ml-3">Cancel</a>
                     </div>
                 </form>

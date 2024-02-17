@@ -58,20 +58,20 @@
                             </thead>
                             <tbody>
                                 {{-- @dd($subcategories) --}}
-                                @foreach ($subcategories as $key => $subcategory)
+                                @foreach ($subCategories as $key => $subCategory)
                                     <tr>
-                                        {{-- <td>{{ $key + $subcategory->firstItem() }}</td> --}}
+                                        {{-- <td>{{ $key + $subCategories->firstItem() }}</td> --}}
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $subcategory->name }} </td>
-                                        <td>{{ $subcategory->slug }} </td>
-                                        <td>{{ $subcategory->category }} </td>
+                                        <td>{{ $subCategory->name }} </td>
+                                        <td>{{ $subCategory->slug }} </td>
+                                        <td>{{ $subCategory->category }} </td>
 
-                                        {{-- @isset($subcategory) --}}
-                                        {{-- @dd($subcategory->category) --}}
+                                        {{-- @isset($subCategories) --}}
+                                        {{-- @dd($subCategories->category) --}}
 
                                         {{-- @endisset --}}
                                         <td>
-                                            @if ($subcategory->status == 1)
+                                            @if ($subCategory->status == 1)
                                                 <svg class="text-success-500 h-6 w-6 text-success"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -88,7 +88,7 @@
                                             @endif
                                         </td>
                                         <td class="d-flex ">
-                                            <a href="#">
+                                            <a href="{{ route('subcategories.edit', $subCategory->id) }}">
                                                 <svg class="filament-link-icon w-4 h-4 mr-1"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                     fill="currentColor" aria-hidden="true">
@@ -98,7 +98,7 @@
                                                 </svg>
                                             </a>
                                             <a href="#" class="text-danger w-4 h-4 mr-1">
-                                                <form action="{{ route('subcategories.destroy', $subcategory->id) }}"
+                                                <form action="{{ route('subcategories.destroy', $subCategory->id) }}"
                                                     method="post">
                                                     @method('DELETE')
                                                     @csrf

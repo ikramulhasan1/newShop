@@ -15,8 +15,8 @@ class SubCategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $subcategories = SubCategory::all();
-        return view('admin.SubCategory.index', compact('subcategories', 'categories'));
+        $subCategories = SubCategory::all();
+        return view('admin.SubCategory.index', compact('categories', 'subCategories'));
     }
 
 
@@ -44,15 +44,14 @@ class SubCategoryController extends Controller
 
     public function edit(SubCategory $subCategory)
     {
-        //
+        $categories = Category::all();
+        return view('admin.SubCategory.edit', compact('subCategory', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, SubCategory $subCategory)
     {
-        //
+        $subCategory->update($request->all());
+        return redirect()->route('subcategories.index');
     }
 
     /**
