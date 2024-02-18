@@ -69,7 +69,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $category->update($request->except('status'));
+        $category->update($request->all('status'));
         return redirect()->route('categories.index');
     }
 

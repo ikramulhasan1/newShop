@@ -7,7 +7,7 @@
             <div class="container-fluid my-2">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Create Category</h1>
+                        <h1>Edit Category</h1>
                     </div>
                     <div class="col-sm-6 text-right">
                         <a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>
@@ -51,8 +51,10 @@
                                     <div class="mb-3">
                                         <label for="status">Status</label>
                                         <select name="status" id="status" class="form-control">
-                                            <option value="1">Active</option>
-                                            <option value="0">Block</option>
+                                            <option {{ $category->status == '1' ? 'selected' : '' }} value="1">Active
+                                            </option>
+                                            <option {{ $category->status == '0' ? 'selected' : '' }} value="0">Block
+                                            </option>
                                         </select>
                                         @error('status')
                                             <div class="text-danger">{{ $message }}</div>
@@ -77,7 +79,7 @@
                         </div>
                     </div>
                     <div class="pb-5 pt-3">
-                        <button class="btn btn-primary">Create</button>
+                        <button class="btn btn-primary">Update</button>
                         <a href="brands.html" class="btn btn-outline-dark ml-3">Cancel</a>
                     </div>
                 </form>

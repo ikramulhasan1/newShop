@@ -20,7 +20,8 @@
         <section class="content">
             <!-- Default box -->
             <div class="container-fluid">
-                <form action="" method="post">
+                <form action="{{ route('subcategories.update', $subCategory->id) }}" method="post">
+                    @method('PATCH')
                     @csrf
                     <div class="card">
                         <div class="card-body">

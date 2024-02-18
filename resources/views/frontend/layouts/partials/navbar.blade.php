@@ -8,7 +8,7 @@
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
-                <a href="account.php" class="nav-link text-dark">My Account</a>
+                <a href="{{ route('dashboard') }}" class="nav-link text-dark">My Account</a>
                 <form action="">
                     <div class="input-group">
                         <input type="text" placeholder="Search For Products" class="form-control"
@@ -41,20 +41,29 @@
                     <!-- <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
                     </li> -->
+                    @if (getCategories()->isNotEmpty())
+                        @forelse (getCategories() as $category)
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{ $category->name }}
+                                </button>
+                                @if ($category->sub_category->isNotEmpty())
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        @foreach ($category->sub_category as $subCategory)
+                                            <li><a class="dropdown-item nav-link"
+                                                    href="#">{{ $subCategory->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif
 
-                    <li class="nav-item dropdown">
-                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Electronics
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item nav-link" href="#">Mobile</a></li>
-                            <li><a class="dropdown-item nav-link" href="#">Tablets</a></li>
-                            <li><a class="dropdown-item nav-link" href="#">Laptops</a></li>
-                            <li><a class="dropdown-item nav-link" href="#">Speakers</a></li>
-                            <li><a class="dropdown-item nav-link" href="#">Watches</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
+                            </li>
+                        @empty
+                        @endforelse
+
+                    @endif
+
+                    {{-- <li class="nav-item dropdown">
                         <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             Men's Fashion
                         </button>
@@ -92,7 +101,7 @@
                             <li><a class="dropdown-item" href="#">Fans</a></li>
                             <li><a class="dropdown-item" href="#">Air Coolers</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
 
 
                 </ul>

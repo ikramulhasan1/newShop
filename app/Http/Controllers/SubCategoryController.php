@@ -51,12 +51,9 @@ class SubCategoryController extends Controller
     public function update(Request $request, SubCategory $subCategory)
     {
         $subCategory->update($request->all());
-        return redirect()->route('subcategories.index');
+        return redirect()->route('subcategories.index', $subCategory->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(SubCategory $subCategory, $id)
     {
         $subCategory->destroy($id);
