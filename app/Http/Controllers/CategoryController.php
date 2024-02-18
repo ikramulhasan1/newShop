@@ -69,16 +69,31 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $category->update($request->all('status'));
+        $category->update($request->all());
         return redirect()->route('categories.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Category $category)
     {
         $category->delete($category);
+        return back();
+    }
+
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->get();
+        return view('admin.Category.trash', compact('categories'));
+    }
+
+    public function restore($id)
+    {
+        Category::with($id)->restore();
+        return back();
+    }
+
+    public function delete($id)
+    {
+        Category::with($id)->forceDelete();
         return back();
     }
 }

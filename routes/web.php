@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function () {
         'brands' => BrandController::class,
         'products' => ProductController::class,
     ]);
+
+    // categories
+    Route::get('/category/trash', [CategoryController::class, 'trash'])->name('categories.trash');
+    Route::get('/category/restore/{id}', [CategoryController::class, 'restore'])->name('categories.restore');
+    Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
 });
 
 require __DIR__ . '/auth.php';

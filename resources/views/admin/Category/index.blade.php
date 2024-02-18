@@ -28,6 +28,7 @@
                             <div class="card-title">
                                 <button type="button" onclick="window.location.href='{{ route('categories.index') }}' "
                                     class="btn btn-sm btn-outline-danger">Reset</button>
+                                <a href="{{ route('categories.trash') }}" class="btn btn-sm btn-danger">Trash</a>
                             </div>
                             <div class="card-tools">
                                 <div class="input-group input-group" style="width: 250px;">
