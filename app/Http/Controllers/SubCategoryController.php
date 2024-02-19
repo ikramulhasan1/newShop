@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\SubCategoryRequest;
 
 class SubCategoryController extends Controller
 {
@@ -15,8 +15,8 @@ class SubCategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $subCategories = SubCategory::all();
-        return view('admin.SubCategory.index', compact('categories', 'subCategories'));
+        $subcategories = SubCategory::all();
+        return view('admin.SubCategory.index', compact('categories', 'subcategories'));
     }
 
 
@@ -36,27 +36,46 @@ class SubCategoryController extends Controller
     }
 
 
-    public function show(SubCategory $subCategory)
+    public function show(SubCategory $subcategory)
     {
         //
     }
 
 
-    public function edit(SubCategory $subCategory)
+    public function edit(SubCategory $subcategory)
     {
         $categories = Category::all();
-        return view('admin.SubCategory.edit', compact('subCategory', 'categories'));
+        return view('admin.SubCategory.edit', compact('subcategory', 'categories'));
     }
 
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, SubCategory $subcategory)
     {
-        $subCategory->update($request->all());
-        return redirect()->route('subcategories.index', $subCategory->id);
+        // dd($request);
+        $subcategory->update($request->all());
+        return redirect()->route('subcategories.index');
     }
 
     public function destroy(SubCategory $subCategory, $id)
     {
         $subCategory->destroy($id);
+        return back();
+    }
+
+    public function trash()
+    {
+        $subcategories = SubCategory::onlyTrashed()->get();
+        return view('admin.SubCategory.trash', compact('subcategories'));
+    }
+
+    public function restore($id)
+    {
+        SubCategory::withTrashed()->find($id)->restore();
+        return back();
+    }
+
+    public function delete($id)
+    {
+        SubCategory::withTrashed()->find($id)->forceDelete();
         return back();
     }
 }

@@ -11,7 +11,7 @@
                         <h1>Trash</h1>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>
+                        <a href="{{ route('subcategories.index') }}" class="btn btn-primary">Back</a>
                     </div>
                 </div>
             </div>
@@ -26,9 +26,8 @@
                     <form action="" method="get">
                         <div class="card-header">
                             <div class="card-title">
-                                <button type="button" onclick="window.location.href='{{ route('categories.trash') }}' "
+                                <button type="button" onclick="window.location.href='{{ route('subcategories.trash') }}' "
                                     class="btn btn-sm btn-outline-danger">Reset</button>
-
                             </div>
                             <div class="card-tools">
                                 <div class="input-group input-group" style="width: 250px">
@@ -51,22 +50,46 @@
                                 <tr>
                                     <th width="60">ID</th>
                                     <th>Name</th>
-                                    <th>Image</th>
                                     <th>Slug</th>
-
+                                    <th>Category</th>
+                                    <th width="100">Status</th>
                                     <th width="100">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($categories as $key => $category)
+                                {{-- @dd($subcategories) --}}
+                                @foreach ($subcategories as $key => $subCategory)
                                     <tr>
+                                        {{-- <td>{{ $key + $subCategories->firstItem() }}</td> --}}
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $category->name }} </td>
-                                        <td><img src="{{ $category->image }}" width="80px" /> </td>
-                                        <td>{{ $category->slug }} </td>
+                                        <td>{{ $subCategory->name }} </td>
+                                        <td>{{ $subCategory->slug }} </td>
+                                        <td>{{ $subCategory->category }} </td>
 
+                                        {{-- @isset($subCategories) --}}
+                                        {{-- @dd($subCategories->category) --}}
+
+                                        {{-- @endisset --}}
+                                        <td>
+                                            @if ($subCategory->status == 1)
+                                                <svg class="text-success-500 h-6 w-6 text-success"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            @else
+                                                <svg class="text-danger-500 h-6 w-6 text-danger"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            @endif
+                                        </td>
                                         <td class="d-flex ">
-                                            <a title="Restore" href="{{ route('categories.restore', $category->id) }}">
+                                            <a title="Restore"
+                                                href="{{ route('subcategories.restore', $subCategory->id) }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25"
                                                     height="25" viewBox="0 0 48 48">
                                                     <linearGradient id="95F_jjTRbyNtAmgVFg~qQa_bDkQlpOV2TWB_gr1"
@@ -92,7 +115,7 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                            <a title="Forever" href="{{ route('categories.delete', $category->id) }}">
+                                            <a title="Forever" href="{{ route('subcategories.delete', $subCategory->id) }}">
                                                 <svg class=" " xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                                     width="25" height="25" viewBox="0 0 64 64">
                                                     <ellipse cx="32" cy="61" opacity=".3" rx="19"
@@ -118,10 +141,10 @@
                                                     </path>
                                                 </svg>
                                             </a>
-
                                         </td>
                                     </tr>
-                                @empty
+                                @endforeach
+                                {{-- @empty
                                     <table>
                                         </tr>
                                         </th>
@@ -129,14 +152,14 @@
                                         </th>
                                         </tr>
                                     </table>
-                                @endforelse
+                                @endforelse --}}
 
                             </tbody>
                         </table>
                     </div>
 
                     <div class="card-footer clearfix">
-                        {{-- {{ $categories->links('pagination::bootstrap-5') }} --}}
+                        {{-- {{$subcategories->links('pagination::bootstrap-5') }} --}}
                     </div>
                 </div>
             </div>

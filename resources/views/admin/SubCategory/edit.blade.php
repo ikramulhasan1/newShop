@@ -20,7 +20,8 @@
         <section class="content">
             <!-- Default box -->
             <div class="container-fluid">
-                <form action="{{ route('subcategories.update', $subCategory->id) }}" method="post">
+                {{-- @dd($subcategory->id) --}}
+                <form action="{{ route('subcategories.update', $subcategory->id) }}" method="post">
                     @method('PATCH')
                     @csrf
                     <div class="card">
@@ -29,7 +30,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" value="{{ old('name') }}" id="name"
+                                        <input type="text" name="name" value="{{ $subcategory->name }}" id="name"
                                             class="form-control" placeholder="Name">
                                         @error('name')
                                             <div class="text-danger">{{ $message }}</div>
@@ -41,7 +42,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="slug">Slug</label>
-                                        <input type="text" name="slug" disabled value="{{ old('slug') }}"
+                                        <input type="text" name="slug" readonly value="{{ $subcategory->slug }}"
                                             id="slug" class="form-control" placeholder="Slug">
                                         @error('slug')
                                             <div class="text-danger">{{ $message }}</div>
@@ -79,8 +80,11 @@
                                     <div class="mb-3">
                                         <label for="showHome">Show on Home</label>
                                         <select name="showHome" id="showHome" class="form-control">
-                                            <option value="Yes">Yes</option>
-                                            <option value="No">No</option>
+                                            <option {{ $subcategory->showHome == 'Yes' ? 'selected' : '' }} value="Yes">
+                                                Yes
+                                            </option>
+                                            <option {{ $subcategory->showHome == 'No' ? 'selected' : '' }} value="No">
+                                                No</option>
                                         </select>
                                         @error('status')
                                             <div class="text-danger">{{ $message }}</div>

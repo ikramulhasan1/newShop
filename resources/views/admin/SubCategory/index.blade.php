@@ -28,6 +28,7 @@
                             <div class="card-title">
                                 <button type="button" onclick="window.location.href='{{ route('subcategories.index') }}' "
                                     class="btn btn-sm btn-outline-danger">Reset</button>
+                                <a href="{{ route('subcategories.trash') }}" class="btn btn-sm btn-danger">Trash</a>
                             </div>
                             <div class="card-tools">
                                 <div class="input-group input-group" style="width: 250px;">
@@ -58,7 +59,7 @@
                             </thead>
                             <tbody>
                                 {{-- @dd($subcategories) --}}
-                                @foreach ($subCategories as $key => $subCategory)
+                                @foreach ($subcategories as $key => $subCategory)
                                     <tr>
                                         {{-- <td>{{ $key + $subCategories->firstItem() }}</td> --}}
                                         <td>{{ $key + 1 }}</td>
@@ -116,7 +117,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                @endforeach;
+                                @endforeach
                                 {{-- @empty
                                     <table>
                                         </tr>

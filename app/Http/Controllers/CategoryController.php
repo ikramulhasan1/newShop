@@ -87,13 +87,13 @@ class CategoryController extends Controller
 
     public function restore($id)
     {
-        Category::with($id)->restore();
+        Category::withTrashed()->find($id)->restore();
         return back();
     }
 
     public function delete($id)
     {
-        Category::with($id)->forceDelete();
+        Category::withTrashed()->find($id)->forceDelete();
         return back();
     }
 }
