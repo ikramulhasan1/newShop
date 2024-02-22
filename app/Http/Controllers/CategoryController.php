@@ -31,24 +31,31 @@ class CategoryController extends Controller
     }
 
 
-    public function uploadImage($name, $image)
+    public function uploadImage($name, $images)
     {
-        // image name database save
-        // main laravel project storage save
+
         $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-        $file_name = $timestamp . '-' . $name . '.' . $image->getClientOriginalExtension();
-        $pathToUpload = storage_path() . '/app/public/categories/';
+        $file_name = $timestamp . '-' . $name . '.' . $images->getClientOriginalExtension();
+        $pathToUpload = storage_path() . '/app/public/category-images/';
 
         if (!is_dir($pathToUpload)) {
             mkdir($pathToUpload, 0755, true);
         }
-        Image::make($image)->resize(634, 792)->save($pathToUpload . $file_name);
+        Image::make($images)->resize(634, 792)->save($pathToUpload . $file_name);
         return $file_name;
     }
 
+
     public function store(CategoryRequest $request)
     {
-        Category::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('images')) {
+            $images = $this->uploadImage($request->name, $request->images);
+            $data['images'] = $images;
+        }
+
+        Category::create($data);
 
         return redirect()->route('categories.index');
     }
@@ -58,16 +65,14 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Category $category)
     {
         return view('admin.Category.edit', compact('category'));
     }
 
 
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->all());
         return redirect()->route('categories.index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use Carbon\Carbon;
 use App\Models\Brand;
 use App\Models\Product;
@@ -52,7 +53,7 @@ class ProductController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
 
         $data = $request->all();

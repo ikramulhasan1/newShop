@@ -40,7 +40,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="slug">Slug</label>
-                                        <input type="text" name="slug" disabled value="{{ old('slug') }}"
+                                        <input type="text" name="slug" readonly value="{{ old('slug') }}"
                                             id="slug" class="form-control" placeholder="Slug">
                                         @error('slug')
                                             <div class="text-danger">{{ $message }}</div>
@@ -62,12 +62,12 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="category">Category</label>
-                                        <select name="category" id="category" class="form-control">
-                                            @if ($categories->isNotEmpty())
+                                        <select name="category_id" id="category" class="form-control">
+                                            @isset($categories)
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}">{{ $category->name ?? '' }}</option>
                                                 @endforeach
-                                            @endif
+                                            @endisset
                                         </select>
                                         @error('category')
                                             <div class="text-danger">{{ $message }}</div>

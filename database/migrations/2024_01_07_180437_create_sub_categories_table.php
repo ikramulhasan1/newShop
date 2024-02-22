@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('status');
             $table->string('category');
-            $table->unsignedBigInteger('category_id')->default(1)->before('status');
-            $table->softDeletes();
+            $table->unsignedBigInteger('category_id');
+            $table->enum('showHome', ['Yes', 'No'])->default('No');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -38,10 +38,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="name">Image</label>
-                                        <input type="file" name="image" id="inputImage"
-                                            class="form-control @error('image') is-invalid @enderror">
-                                        @error('image')
+                                        <label for="inputImage">Image</label>
+                                        <input type="file" name="images" id="inputImage"
+                                            class="form-control @error('images') is-invalid @enderror">
+                                        @error('images')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
 
@@ -50,7 +50,7 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="email">Slug</label>
+                                        <label for="slug">Slug</label>
                                         <input type="text" name="slug" readonly id="slug" class="form-control"
                                             placeholder="Slug">
                                         @error('slug')
@@ -77,7 +77,7 @@
                                             <option value="Yes">Yes</option>
                                             <option value="No">No</option>
                                         </select>
-                                        @error('status')
+                                        @error('showHome')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>

@@ -29,9 +29,16 @@ class SubCategoryController extends Controller
 
     public function store(SubCategoryRequest $request)
     {
-        // dd($request->all());
+        //return $request->all();
+        $category_name = Category::find($request->category_id)->name;
 
-        SubCategory::create($request->all());
+        $subCategory = new SubCategory();
+        $subCategory->fill($request->all());
+
+        $subCategory->category = $category_name;
+
+        $subCategory->save();
+
         return redirect()->route('subcategories.index');
     }
 

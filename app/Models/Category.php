@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -20,6 +21,11 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 
     public function sluggable(): array
     {

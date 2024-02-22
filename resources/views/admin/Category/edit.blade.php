@@ -40,8 +40,8 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="slug">Slug</label>
-                                        <input type="text" name="slug" readonly value="{{ $category->slug }}"
-                                            id="slug" class="form-control">
+                                        <input type="text" name="slug" readonly value="" id="slug"
+                                            class="form-control">
                                         @error('slug')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror

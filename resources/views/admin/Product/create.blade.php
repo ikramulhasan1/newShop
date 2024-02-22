@@ -30,8 +30,11 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="title">Title</label>
-                                                <input type="text" name="title" id="title" class="form-control"
-                                                    placeholder="Title">
+                                                <input type="text" name="title" value="{{ old('title') }}"
+                                                    id="title" class="form-control" placeholder="Title">
+                                                @error('title')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -39,12 +42,18 @@
                                                 <label for="slug">Slug</label>
                                                 <input type="text" readonly name="slug" id="slug"
                                                     class="form-control" placeholder="Slug">
+                                                @error('slug')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="editor">Description</label>
-                                                <textarea name="description" id="editor" cols="30" rows="10" class="summernote" placeholder="Description"></textarea>
+                                                <textarea name="description" id="editor" cols="30" rows="10" class="summernote" placeholder="Description"> {{ old('description') }}</textarea>
+                                                @error('description')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +67,9 @@
                                             <br>Drop files here or click to upload.<br><br>
                                         </div> --}}
                                         <input type="file" name="image" id="">
-
+                                        @error('image')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -69,8 +80,11 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="price">Price</label>
-                                                <input type="text" name="price" id="price" class="form-control"
-                                                    placeholder="Price">
+                                                <input type="text" name="price" value="{{ old('price') }}"
+                                                    id="price" class="form-control" placeholder="Price">
+                                                @error('price')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -149,6 +163,9 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        @error('category')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="category">Sub category</label>

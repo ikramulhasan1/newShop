@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -21,5 +22,10 @@ class Product extends Model
                 'source' => 'title', // Replace 'name' with the actual column you want to use for generating the slug
             ],
         ];
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

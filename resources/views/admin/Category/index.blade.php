@@ -62,7 +62,14 @@
                                     <tr>
                                         <td>{{ $key + $categories->firstItem() }}</td>
                                         <td>{{ $category->name }} </td>
-                                        <td><img src="{{ $category->image }}" width="80px" /> </td>
+                                        <td>
+                                            @if (!empty($category->images))
+                                                <img src="{{ asset('storage/category-images/' . $category->images) }}"
+                                                    class="img-fluid " width="50">
+                                            @else
+                                                <img src="{!! asset('storage/product-images/defult/150x150.png') !!}" class="img-fluid" width="80">
+                                            @endif
+                                        </td>
                                         <td>{{ $category->slug }} </td>
                                         <td>
                                             @if ($category->status == 1)
