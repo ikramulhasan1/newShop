@@ -38,9 +38,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
-                        </li> -->
+                    </li>
 
                     @if ($categories->isNotEmpty())
                         @forelse ($categories as $category)
@@ -54,7 +54,8 @@
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         @foreach ($category->sub_category as $subCategory)
                                             <li><a class="dropdown-item nav-link"
-                                                    href="#">{{ $subCategory->name }}</a></li>
+                                                    href="#">{{ $subCategory->name }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 @endif

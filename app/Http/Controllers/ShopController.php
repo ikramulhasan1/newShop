@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class FrontendController extends Controller
+class ShopController extends Controller
 {
     public function index()
     {
@@ -18,17 +19,18 @@ class FrontendController extends Controller
             ->where('showHome', 'Yes')
             ->get();
 
-        $products = Product::where('is_featured', 'Yes')
-            ->orderBy('id', 'DESC')
-            ->take(8)
+        $brands = Brand::orderBy('name', 'ASC')
             ->where('status', 1)
             ->get();
 
-        $latestProducts = Product::orderBy('id', 'DESC')
+        $products = Product::orderBy('id', 'DESC')
             ->where('status', 1)
-            ->take(8)
             ->get();
 
-        return view('frontend.home', compact('categories', 'products', 'latestProducts'));
+        $data['categories'] =  $categories;
+        $data['brands'] =  $brands;
+        $data['products'] =  $products;
+
+        return view('frontend.shop', $data);
     }
 }

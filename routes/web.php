@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubCategoryController;
 
 // Route::get('/', function () {
@@ -19,6 +20,7 @@ use App\Http\Controllers\SubCategoryController;
 
 // Frontend view
 Route::get('/', [FrontendController::class, 'index'])->name('front.home');
+Route::get('/shop', [ShopController::class, 'index'])->name('front.shop');
 
 
 
