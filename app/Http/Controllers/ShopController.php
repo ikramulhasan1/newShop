@@ -38,7 +38,7 @@ class ShopController extends Controller
         }
 
         $products = Product::orderBy('id', 'DESC');
-        $products = $products->get();
+        $products = $products->paginate(10);
 
         $data['categories'] =  $categories;
         $data['brands'] =  $brands;

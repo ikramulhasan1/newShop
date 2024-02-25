@@ -211,6 +211,7 @@
                 @endif
 
             </div>
+            {{ $products->links('pagination::bootstrap-5') }}
         </div>
     </section>
 @endsection
