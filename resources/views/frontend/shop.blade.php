@@ -35,17 +35,20 @@
                                                 </h2>
                                             @else
                                                 <a href="{{ route('front.shop', $category->slug) }}"
-                                                    class="nav-item nav-link"> {{ $category->name }}</a>
+                                                    class="nav-item nav-link  {{ $categorySelected == $category->id ? 'text-primary' : '' }}">
+                                                    {{ $category->name }}</a>
                                             @endif
 
-                                            <div id="collapseOne-{{ $key }}" class="accordion-collapse collapse"
+                                            <div id="collapseOne-{{ $key }}"
+                                                class="accordion-collapse collapse {{ $categorySelected == $category->id ? 'show' : '' }}"
                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample"
                                                 style="">
                                                 <div class="accordion-body">
                                                     <div class="navbar-nav">
                                                         @foreach ($category->sub_category as $subCategory)
+                                                            {{-- @dd($subCategory) --}}
                                                             <a href="{{ route('front.shop', [$category->slug, $subCategory->slug]) }}"
-                                                                class="nav-item nav-link">{{ $subCategory->name }}</a>
+                                                                class="nav-item nav-link {{ $categorySelected == $subCategory->id ? 'text-primary' : '' }}">{{ $subCategory->name }}</a>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -87,9 +90,9 @@
                         <div class="card-body">
                             @forelse ($brands as $brand)
                                 <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" name="brand[]"
+                                    <input class="form-check-input brand-label" type="checkbox" name="brand[]"
                                         value="{{ $brand->id }}" id="brand-{{ $brand->id }}">
-                                    <label class="form-check-label" for="flexCheckDefault">
+                                    <label class="form-check-label" for="brand-{{ $brand->id }}">
                                         {{ $brand->name }}
                                     </label>
                                 </div>
@@ -105,30 +108,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    $0-$100
-                                </label>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    $100-$200
-                                </label>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    $200-$500
-                                </label>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    $500+
-                                </label>
-                            </div>
+                            <input type="text" class="js-range-slider" name="my_range" value="" />
                         </div>
                     </div>
                 </div>
@@ -154,12 +134,22 @@
                             </div>
 
                             @forelse ($products as $product)
+                                {{-- @php
+                                    $productImage = $product->image->first();
+                                @endphp --}}
                                 <div class="col-md-4">
                                     <div class="card product-card">
                                         <div class="product-image position-relative">
-                                            <a href="" class="product-img"><img class="card-img-top"
-                                                    src="{{ 'storage/product-images/' . $product->image }}"
-                                                    alt=""></a>
+                                            @if ($product->image)
+                                                <a href="" class="product-img"><img class="card-img-top"
+                                                        src="{{ 'storage/product-images/' . $product->image }}"
+                                                        alt=""></a>
+                                            @else
+                                                <a href="" class="product-img"><img class="card-img-top"
+                                                        src="{{ asset('ui/frontend/images/defult/150x150.png') }}"
+                                                        alt=""></a>
+                                            @endif
+
                                             <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                             <div class="product-action">
@@ -182,25 +172,11 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="card product-card">
-                                        <div class="product-image position-relative">
-                                            <a href="" class="product-img"><img class="card-img-top"
-                                                    src="images/product-1.jpg" alt=""></a>
-                                            <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                                        <div class="card-body text-center m-1">
+                                            <h2>Product not Available</h2>
 
-                                            <div class="product-action">
-                                                <a class="btn btn-dark" href="#">
-                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="card-body text-center mt-3">
-                                            <a class="h6 link" href="product.php">Dummy Product Title</a>
-                                            <div class="price mt-2">
-                                                <span class="h5"><strong>$100</strong></span>
-                                                <span class="h6 text-underline"><del>$120</del></span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -237,4 +213,41 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('custom.Js')
+    <script>
+        rangeSlider = $(".js-range-slider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 1000,
+            from: 0,
+            step: 10,
+            to: 500,
+            skin: "round",
+            max_postfix: "+",
+            prefix: "$",
+            onFinish: function() {
+                apply_Filters()
+            }
+        });
+
+        // Saving it's instance to var
+        var slider = $(".js-range-slider").data("ionRangeSlider");
+
+        $(".brand-label").change(function() {
+            apply_filters()
+        });
+
+        function apply_filters() {
+            var brands = [];
+
+            $(".brands-label").each(function() {
+                if ($(this).is(":checked") == true) {
+                    brands.push($(this).val());
+                }
+            })
+            console.log(brands);
+        }
+    </script>
 @endsection

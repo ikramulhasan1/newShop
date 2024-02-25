@@ -39,8 +39,6 @@ class ProductController extends Controller
 
     public function uploadImage($name, $image)
     {
-        // image name database save
-        // main laravel project storage save
         $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
         $file_name = $timestamp . '-' . $name . '.' . $image->getClientOriginalExtension();
         $pathToUpload = storage_path() . '/app/public/product-images/';

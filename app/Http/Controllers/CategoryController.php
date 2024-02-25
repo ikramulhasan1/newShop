@@ -21,7 +21,7 @@ class CategoryController extends Controller
             $categories = $categories->where('name', 'like', '%' . $request->get('keyword') . '%');
         }
 
-        $categories = $categories->paginate(10);
+        $categories = $categories->paginate(5);
         return view('admin.Category.index', compact('categories'));
     }
 

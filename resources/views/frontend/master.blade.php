@@ -41,6 +41,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="{{ asset('ui/frontend') }}/https://fonts.googleapis.com">
     <link rel="preconnect" href="{{ asset('ui/frontend') }}/https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ asset('ui/frontend/css/ion.rangeSlider.min.css') }}">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap"
         rel="stylesheet">
@@ -67,6 +69,9 @@
     <script src="{{ asset('ui/frontend') }}/js/lazyload.17.6.0.min.js"></script>
     <script src="{{ asset('ui/frontend') }}/js/slick.min.js"></script>
     <script src="{{ asset('ui/frontend') }}/js/custom.js"></script>
+    <script src="{{ asset('ui/frontend/js/ion.rangeSlider.min.js') }}"></script>
+
+
     <script>
         window.onscroll = function() {
             myFunction()
@@ -83,6 +88,8 @@
             }
         }
     </script>
+
+    @yield('custom.Js')
 </body>
 
 </html>

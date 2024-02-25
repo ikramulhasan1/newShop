@@ -74,7 +74,7 @@
                             <tbody>
                                 @forelse ($products as $key => $product)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $key + $products->firstItem() }}</td>
                                         {{-- <td><img src="{{ storage_path() . '/app/public/product-images/' . $product->image }}"
                                                 class="img-fluid " width="200"></td> --}}
                                         <td>

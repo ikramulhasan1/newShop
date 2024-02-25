@@ -59,7 +59,7 @@
                                 @forelse ($brands as $key => $brand)
                                     <tr>
                                         {{-- <td>{{ $key + $brands->firstItem() }}</td> --}}
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $key + $brands->firstItem() }}</td>
                                         <td>{{ $brand->name }} </td>
                                         <td>{{ $brand->slug }} </td>
                                         <td>
@@ -123,7 +123,7 @@
                     </div>
 
                     <div class="card-footer clearfix">
-                        {{-- {{ $brands->links('pagination::bootstrap-5') }} --}}
+                        {{ $brands->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

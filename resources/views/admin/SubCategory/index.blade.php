@@ -62,7 +62,7 @@
                                 @foreach ($subcategories as $key => $subCategory)
                                     <tr>
                                         {{-- <td>{{ $key + $subCategories->firstItem() }}</td> --}}
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $key + $subcategories->firstItem() }}</td>
                                         <td>{{ $subCategory->name }} </td>
                                         <td>{{ $subCategory->slug }} </td>
                                         <td>{{ $subCategory->category }} </td>
@@ -133,7 +133,7 @@
                     </div>
 
                     <div class="card-footer clearfix">
-                        {{-- {{$subcategories->links('pagination::bootstrap-5') }} --}}
+                        {{ $subcategories->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
