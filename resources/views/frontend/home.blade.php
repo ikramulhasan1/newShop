@@ -158,8 +158,9 @@
                             <div class="card product-card">
                                 {{-- @foreach ($category->products as $product) --}}
                                 <div class="product-image position-relative">
-                                    <a href="" class="product-img"><img class="card-img-top"
-                                            src="{{ 'storage/product-images/' . $product->image }} " alt=""></a>
+                                    <a href="{{ route('front.product', $product->slug) }}" class="product-img"><img
+                                            class="card-img-top" src="{{ 'storage/product-images/' . $product->image }} "
+                                            alt=""></a>
                                     <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
@@ -169,7 +170,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="product.php">{{ $product->title }} </a>
+                                    <a class="h6 link"
+                                        href="{{ route('front.product', $product->slug) }}">{{ $product->title }} </a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>{{ $product->price }}</strong></span>
                                         @if ($product->compare_price > $product->price)
@@ -220,7 +222,8 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="" class="product-img"><img class="card-img-top"
+                                    <a href="{{ route('front.product', $product->slug) }}" class="product-img"><img
+                                            class="card-img-top"
                                             src="{{ 'storage/product-images/' . $latestProduct->image }}" alt=""></a>
                                     <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
@@ -231,7 +234,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="product.php">{{ $latestProduct->title }}</a>
+                                    <a class="h6 link"
+                                        href="{{ route('front.product', $product->slug) }}">{{ $latestProduct->title }}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>{{ $latestProduct->price }}</strong></span>
                                         @if ($latestProduct->compare_price > $latestProduct->price)

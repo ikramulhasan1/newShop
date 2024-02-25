@@ -4,7 +4,7 @@
         <div class="container">
             <div class="light-font">
                 <ol class="breadcrumb primary-color mb-0">
-                    <li class="breadcrumb-item"><a class="white-text" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.home') }}">Home</a></li>
                     <li class="breadcrumb-item active">Shop</li>
                 </ol>
             </div>
@@ -141,7 +141,8 @@
                                     <div class="card product-card">
                                         <div class="product-image position-relative">
                                             @if ($product->image)
-                                                <a href="" class="product-img"><img class="card-img-top"
+                                                <a href="{{ route('front.product', $product->slug) }}"
+                                                    class="product-img"><img class="card-img-top"
                                                         src="{{ 'storage/product-images/' . $product->image }}"
                                                         alt=""></a>
                                             @else
@@ -159,7 +160,8 @@
                                             </div>
                                         </div>
                                         <div class="card-body text-center mt-3">
-                                            <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                            <a class="h6 link"
+                                                href="{{ route('front.product', $product->slug) }}">{{ $product->title }}</a>
                                             <div class="price mt-2">
                                                 <span class="h5"><strong>{{ $product->price }}</strong></span>
                                                 @if ($product->compare_price > $product->price)
