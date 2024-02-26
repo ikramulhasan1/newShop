@@ -143,7 +143,7 @@
                                             @if ($product->image)
                                                 <a href="{{ route('front.product', $product->slug) }}"
                                                     class="product-img"><img class="card-img-top"
-                                                        src="{{ 'storage/product-images/' . $product->image }}"
+                                                        src="{{ asset('storage/product-images/' . $product->image) }}"
                                                         alt=""></a>
                                             @else
                                                 <a href="" class="product-img"><img class="card-img-top"

@@ -207,6 +207,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Related product</h2>
+                                    <div class="mb-3">
+                                        <select name="is_related" id="related" class="form-control">
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

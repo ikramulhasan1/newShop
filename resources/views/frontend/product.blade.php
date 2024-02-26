@@ -6,7 +6,7 @@
                 <ol class="breadcrumb primary-color mb-0">
                     <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.home') }}">Home</a></li>
                     <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.shop') }}">Shop</a></li>
-                    <li class="breadcrumb-item">{{ $products->title }}</li>
+                    <li class="breadcrumb-item">{{ $product->title }}</li>
                 </ol>
             </div>
         </div>
@@ -16,32 +16,15 @@
         <div class="container">
             <div class="row ">
                 <div class="col-md-5">
-                    <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner bg-light">
-                            <div class="carousel-item">
-                                <img class="w-100 h-100" src="images/product-1.jpg" alt="Image">
-                            </div>
-                            <div class="carousel-item active">
-                                <img class="w-100 h-100" src="images/product-2.jpg" alt="Image">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="w-100 h-100" src="images/product-3.jpg" alt="Image">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="w-100 h-100" src="images/product-4.jpg" alt="Image">
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#product-carousel" data-bs-slide="prev">
-                            <i class="fa fa-2x fa-angle-left text-dark"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#product-carousel" data-bs-slide="next">
-                            <i class="fa fa-2x fa-angle-right text-dark"></i>
-                        </a>
-                    </div>
+                    @if (!empty($product->image))
+                        <img class="w-100 h-100" src="{!! asset('storage/product-images/' . $product->image) !!}" alt="Image">
+                    @else
+                        <img class="w-100 h-100" src="{{ asset('ui/frontend/images/defult/150x150.png') }}" alt="Image">
+                    @endif
                 </div>
                 <div class="col-md-7">
                     <div class="bg-light right">
-                        <h1>{{ $products->title }}</h1>
+                        <h1>{{ $product->title }}</h1>
                         <div class="d-flex mb-3">
                             <div class="text-primary mr-2">
                                 <small class="fas fa-star"></small>
@@ -52,13 +35,13 @@
                             </div>
                             <small class="pt-1">(99 Reviews)</small>
                         </div>
-                        @if ($products->compare_price > $products->price)
-                            <h2 class="price text-secondary"><del>{{ $products->compare_price }}</del></h2>
+                        @if ($product->compare_price > $product->price)
+                            <h2 class="price text-secondary"><del>{{ $product->compare_price }}</del></h2>
                         @endif
 
-                        <h2 class="price ">{{ $products->price }}</h2>
+                        <h2 class="price ">{{ $product->price }}</h2>
 
-                        <p>{!! $products->description !!}</p>
+                        <p>{!! Str::words($product->description, 10, '...') !!}</p>
                         <a href="cart.php" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
                     </div>
                 </div>
@@ -85,7 +68,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="description" role="tabpanel"
                                 aria-labelledby="description-tab">
-                                {!! $products->description !!}
+                                {!! $product->description !!}
                             </div>
                             <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
                                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit, incidunt blanditiis

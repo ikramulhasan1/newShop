@@ -52,13 +52,13 @@ class ShopController extends Controller
 
     public function product($slug)
     {
-        $products = Product::where('slug', $slug)->first();
-        if ($products == null) {
+        $product = Product::where('slug', $slug)->first();
+        if ($product == null) {
             abort(404);
         }
         $categories = Category::orderBy('name', 'ASC')->with('sub_category')->orderBy('id', 'DESC')
             ->where('status', 1)->where('showHome', 'Yes')->get();
 
-        return view('frontend.product', compact('products', 'categories'));
+        return view('frontend.product', compact('product', 'categories'));
     }
 }
