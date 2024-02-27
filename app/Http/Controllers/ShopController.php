@@ -59,6 +59,13 @@ class ShopController extends Controller
         $categories = Category::orderBy('name', 'ASC')->with('sub_category')->orderBy('id', 'DESC')
             ->where('status', 1)->where('showHome', 'Yes')->get();
 
-        return view('frontend.product', compact('product', 'categories'));
+        $relatedProducts = [];
+        if ($product->related_products != '') {
+            $productArray = explode(',', $product->related_products);
+            $relatedProducts = Product::whereIn('id', $productArray)->get();
+        }
+
+
+        return view('frontend.product', compact('product', 'categories', 'relatedProducts'));
     }
 }

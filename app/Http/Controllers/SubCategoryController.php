@@ -31,10 +31,8 @@ class SubCategoryController extends Controller
     {
         //return $request->all();
         $category_name = Category::find($request->category_id)->name;
-
         $subCategory = new SubCategory();
         $subCategory->fill($request->all());
-
         $subCategory->category = $category_name;
 
         $subCategory->save();

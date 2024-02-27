@@ -207,7 +207,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-3">
+                            {{-- <div class="card mb-3">
                                 <div class="card-body">
                                     <h2 class="h4 mb-3">Related product</h2>
                                     <div class="mb-3">
@@ -217,7 +217,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 

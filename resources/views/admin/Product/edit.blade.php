@@ -210,6 +210,27 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- Related Product --}}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Related product</h2>
+                                    <div class="mb-3">
+                                        <select multiple name="related_products[]" id="related_products"
+                                            class="related-products w-100 form-control">
+                                            @if (!empty($product))
+                                                {{-- @foreach ($product as $relProduct) --}}
+                                                {{-- @dd($relatedProducts) --}}
+                                                <option selected value="{{ $product->title }}">
+                                                    {{ $product->title }}
+                                                </option>
+                                                {{-- @endforeach --}}
+                                            @else
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -227,6 +248,23 @@
 
 @section('customJs')
     <script>
+        // Select2
+        $('.related-products').select2({
+            ajax: {
+                url: '{{ route('products.getproducts') }}',
+                dataType: 'json',
+                tags: true,
+                multiple: true,
+                minimumInputLength: 3,
+                processResults: function(data) {
+                    return {
+                        results: data.tags
+                    };
+                }
+            }
+        });
+
+
         ClassicEditor
             .create(document.querySelector('#editor'))
             .catch(error => {

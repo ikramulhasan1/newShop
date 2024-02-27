@@ -49,6 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/subcategory/trash', [SubCategoryController::class, 'trash'])->name('subcategories.trash');
     Route::get('/subcategory/restore/{id}', [SubCategoryController::class, 'restore'])->name('subcategories.restore');
     Route::get('/subcategory/delete/{id}', [SubCategoryController::class, 'delete'])->name('subcategories.delete');
+
+    // products
+    Route::get('/get-products', [ProductController::class, 'getProducts'])->name('products.getproducts');
 });
 
 require __DIR__ . '/auth.php';

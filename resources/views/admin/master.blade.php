@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('ui/backend') }}/css/adminlte.min.css">
     <link rel="stylesheet" href="{{ asset('ui/backend') }}/css/custom.css">
 
+    <link rel="stylesheet" href="{{ asset('ui/backend/plugins/select2/css/select2.min.css') }}">
+
     {{-- DropZone/Image intrgration --}}
     <link rel="stylesheet" href="{{ asset('ui/backend/plugins/dropzone/min/dropzone.min.css') }}">
 </head>
@@ -48,6 +50,8 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
     {{-- DropZone/Image intrgration --}}
     <script src="{{ asset('ui/backend/plugins/dropzone/min/dropzone.min.js') }}"></script>
+    {{-- Select2 --}}
+    <script src="{{ asset('ui/backend/plugins/select2/js/select2.min.js') }}"></script>
 
     <script type="text/javascript">
         $.ajaxSetup({

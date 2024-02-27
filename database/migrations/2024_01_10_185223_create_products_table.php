@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('brand');
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->enum('is_featured', ['Yes', 'No'])->default('No');
+            $table->string('related_products')->nullable();
             $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();

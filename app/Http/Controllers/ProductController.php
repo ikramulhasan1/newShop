@@ -74,9 +74,18 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        // dd($product);
+        // $relatedProducts = [];
+        // if ($product->related_products != '') {
+        //     $productArray = explode(',', $product->related_products);
+        //     $relatedProducts = Product::whereIn('id', $productArray)->get();
+        // }
+        // dd($relatedProducts);
+
         $categories = Category::all();
         $subCategories = SubCategory::all();
         $brands = Brand::all();
+        // dd($relatedProducts);
 
         return view('admin.Product.edit', compact('categories', 'product', 'subCategories', 'brands'));
     }
@@ -92,5 +101,22 @@ class ProductController extends Controller
     {
         $product->delete($product);
         return back();
+    }
+
+    public function getProducts(Request $request)
+    {
+        $tempProduct = [];
+        if ($request->term != "") {
+            $products = Product::where('title', 'like', '%' . $request->term . '%')->get();
+            if ($products != null) {
+                foreach ($products as $product) {
+                    $tempProduct[] = array('id' => $product->id, 'text' => $product->title);
+                }
+            }
+        }
+        return response()->json([
+            'tags' => $tempProduct,
+            'status' => true
+        ]);
     }
 }
