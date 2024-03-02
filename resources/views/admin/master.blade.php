@@ -18,6 +18,9 @@
 
     {{-- DropZone/Image intrgration --}}
     <link rel="stylesheet" href="{{ asset('ui/backend/plugins/dropzone/min/dropzone.min.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -58,7 +61,19 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });
+        })
+    </script>
+    <script>
+        // $.ajaxSetup {
+        //     (
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     )
+        // }
+        // Example using Axios
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
     </script>
     @yield('customJs')
 </body>

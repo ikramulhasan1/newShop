@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-use App\Http\Requests\CategoryRequest;
 
+use App\Http\Requests\CategoryRequest;
 use function PHPUnit\Framework\isEmpty;
 use Illuminate\Contracts\Pagination\Paginator;
 
@@ -49,7 +50,6 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $data = $request->all();
-
         if ($request->hasFile('images')) {
             $images = $this->uploadImage($request->name, $request->images);
             $data['images'] = $images;

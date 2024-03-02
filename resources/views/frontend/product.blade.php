@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
     <section class="section-5 pt-3 pb-3 mb-3 bg-white">
         <div class="container">
@@ -42,7 +42,19 @@
                         <h2 class="price ">{{ $product->price }}</h2>
 
                         <p>{!! Str::words($product->description, 10, '...') !!}</p>
-                        <a href="cart.php" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
+                        <a href="javascript:void(0)"
+                            onclick="event.preventDefault();document.getElementById('addToCart').submit();"
+                            class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO
+                            CART
+                            <form id="addToCart" action="{{ route('front.addToCart') }}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="id" id="id" value="{{ $product->id }}">
+                                <input type="hidden" name="qty" id="qty" value="1">
+
+                            </form>
+
+                        </a>
                     </div>
                 </div>
 
@@ -102,8 +114,8 @@
                     @foreach ($relatedProducts as $relProduct)
                         <div class="card product-card">
                             <div class="product-image position-relative">
-                                <a href="" class="product-img"><img class="card-img-top" src="images/product-1.jpg"
-                                        alt=""></a>
+                                <a href="" class="product-img"><img class="card-img-top"
+                                        src="images/product-1.jpg" alt=""></a>
                                 <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                 <div class="product-action">
@@ -128,4 +140,23 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('custom.Js')
+    <script type="text/javascript">
+        // function addToCart(id) {
+        //     $.ajax({
+        //         url: '{{ route('front.addToCart') }}',
+        //         type: 'POST',
+        //         data: {
+        //             id: id
+        //         },
+        //         dataType: 'json',
+        //         success: function(response) {
+
+        //         }
+
+        //     })
+        // }
+    </script>
 @endsection

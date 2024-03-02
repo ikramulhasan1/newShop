@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Str;
 // use GuzzleHttp\Psr7\Request;
 // use Dotenv\Util\Str;
@@ -22,6 +23,11 @@ use App\Http\Controllers\SubCategoryController;
 Route::get('/', [FrontendController::class, 'index'])->name('front.home');
 Route::get('/shop/{categorySlug?}/{subCategorySlug?}', [ShopController::class, 'index'])->name('front.shop');
 Route::get('/product/{slug}', [ShopController::class, 'product'])->name('front.product');
+
+// Cart
+Route::get('/cart', [CartController::class, 'index'])->name('front.cart');
+Route::post('/cart/store', [CartController::class, 'addToCart'])->name('front.addToCart');
+
 
 
 Route::get('/dashboard', function () {

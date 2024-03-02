@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 @section('content')
     <section class="section-1">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel"
